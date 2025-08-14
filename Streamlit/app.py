@@ -6,8 +6,9 @@ import joblib
 # Load Models
 # ------------------------
 
-age_model=joblib.load""
-age_model, treatment_model = load_models()
+age_model=joblib.load("Streamlit/reg_model.pkl")
+treatment_model=joblib.load("Streamlit/clf_model.pkl")
+
 
 # ------------------------
 # Sidebar Navigation
