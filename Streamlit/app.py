@@ -1,18 +1,12 @@
 import streamlit as st
 import pandas as pd
-import pickle
+import joblib
 
 # ------------------------
 # Load Models
 # ------------------------
-@st.cache_resource
-def load_models():
-    with open(r"Streamlit/reg_model.pkl", "rb") as f:
-        age_model = pickle.load(f)
-    with open(r"Streamlit/clf_model.pkl", "rb") as f:
-        treatment_model = pickle.load(f)
-    return age_model, treatment_model
 
+age_model=joblib.load""
 age_model, treatment_model = load_models()
 
 # ------------------------
