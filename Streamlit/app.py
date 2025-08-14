@@ -134,7 +134,7 @@ elif section == "Age Prediction":
     st.title("Age Prediction")
     input_df = inputs_for_age_prediction()
     if st.button("Predict Age"):
-        prediction = age_model.predict(input_df[0])
+        prediction = age_model.predict(input_df)
         st.success(f"Predicted Age: {prediction:.1f} years")
 
 # ------------------------
@@ -144,7 +144,7 @@ elif section == "Treatment Prediction":
     st.title("Treatment Prediction")
     input_df = inputs_for_treatment_prediction()
     if st.button("Predict Treatment"):
-        prediction = treatment_model.predict(input_df[0])
+        prediction = treatment_model.predict(input_df)
         st.success(f"Treatment Prediction: {'Yes' if prediction == 1 else 'No'}")
 
 # ------------------------
