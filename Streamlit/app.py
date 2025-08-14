@@ -1,36 +1,37 @@
 import streamlit as st
+import numpy as np
+import joblib 
 import pandas as pd
-import joblib
-
-# ------------------------
-# Load Models
-# ------------------------
-
-age_model=joblib.load("Streamlit/reg_model.pkl")
-treatment_model=joblib.load("Streamlit/clf_model.pkl")
 
 
-# ------------------------
-# Sidebar Navigation
-# ------------------------
-st.sidebar.title("Navigation")
-section = st.sidebar.radio(
-    "Go to:",
-    ["About", "Age Prediction", "Treatment Prediction", "Clustering Report"]
-)
 
-# ------------------------
-# Input for Age Prediction
-# ------------------------
-def inputs_for_age_prediction():
+page = st.sidebar.selectbox("Go to", ["About","Predict Age","Treatment Seeking Employees","Clustering Report"])
+
+if page == 'About':
+    st.header('Dataset Overview')
+    st.markdown('[Dataset Used : ] , https://www.kaggle.com/datasets/osmi/mental-health-in-tech-survey')
+    st.write('This dataset is from a 2014 survey that measures attitudes towards mental health and frequency of mental health disorders in the tech workplace.')
+    
+    st.header('Skewness in Age !')
+  
+    st.write('The dataset is not in particular an ideal option for regression due to its skew score of 1.05.')
+    st.image(r'Images/Skewness.png')
+    
+
+
+
+
+elif page == 'Predict Age':
+    st.header("📊 Age Prediction")
+    st.subheader("Predicting age of employee using a Linear Regression model, based on their responses to certain questions about their mental health.")
+    st.caption('(Acknowledgement: This dataset is not ideal for predicting age using regression. This is for research purposes only.)')
+
     gender = st.selectbox("Gender", ['Male', 'Female', 'Other'])
     self_employed = st.selectbox('Are you self-employed?', ['Unknown', 'Yes', 'No'])
     family_history = st.selectbox("Do you have a family history of mental illness?", ['Yes', 'No'])
     treatment = st.selectbox('Have you sought treatment for a mental health condition?', ['Yes', 'No'])
-    work_interfere = st.selectbox(
-        'If you have a mental health condition, do you feel that it interferes with your work?',
-        ['Often', 'Rarely', 'Never', 'Sometimes', 'Unknown']
-    )
+    work_interfere = st.selectbox('If you have a mental health condition, do you feel that it interferes with your work?',
+                                  ['Often', 'Rarely', 'Never', 'Sometimes', 'Unknown'])
     remote_work = st.selectbox('Do you work remotely (outside of an office) at least 50% of the time?', ['Yes', 'No'])
     benefits = st.selectbox('Does your employer provide mental health benefits?', ["Don't know", 'Yes', 'No'])
     care_options = st.selectbox('Do you know the options for mental health care your employer provides?',
@@ -45,40 +46,48 @@ def inputs_for_age_prediction():
                                              ['No', 'Maybe', 'Yes'])
     coworkers = st.selectbox('Would you discuss a mental health issue with your coworkers?',
                              ['Some of them', 'No', 'Yes'])
-    mental_health_interview = st.selectbox('Would you bring up a mental health issue in an interview?', ['No', 'Yes'])
+    mental_health_interview = st.selectbox('Would you bring up a mental health issue in an interview?',
+                                           [ 'No', 'Yes'])
     supervisor = st.selectbox('Would you discuss a mental health issue with your supervisor(s)?',
                               ['No', 'Maybe', 'Yes'])
+    
+   # Feature order must match training
+    input_df = pd.DataFrame([{
+    'Gender': gender,
+    'self_employed': self_employed,
+    'family_history': family_history,
+    'treatment': treatment,
+    'work_interfere': work_interfere,
+    'remote_work': remote_work,
+    'benefits': benefits,
+    'care_options': care_options,
+    'wellness_program': wellness_program,
+    'seek_help': seek_help,
+    'leave': leave,
+    'mental_health_consequence': mental_health_consequence,
+    'coworkers': coworkers,
+    'mental_health_interview': mental_health_interview,
+    'supervisor': supervisor
+}])
+   
+    
+# This will work with the pipeline
+    if st.button('Predict'):
+        model = joblib.load('Streamlit/reg_model.pkl')
+        predicted_age = model.predict(input_df)
+        st.write(f"Predicted Age: {np.expm1(predicted_age)} years")
 
-    return pd.DataFrame({
-        'Gender': [gender],
-        'self_employed': [self_employed],
-        'family_history': [family_history],
-        'treatment': [treatment],
-        'work_interfere': [work_interfere],
-        'remote_work': [remote_work],
-        'benefits': [benefits],
-        'care_options': [care_options],
-        'wellness_program': [wellness_program],
-        'seek_help': [seek_help],
-        'leave': [leave],
-        'mental_health_consequence': [mental_health_consequence],
-        'coworkers': [coworkers],
-        'mental_health_interview': [mental_health_interview],
-        'supervisor': [supervisor]
-    })
-
-# ------------------------
-# Input for Treatment Prediction
-# ------------------------
-def inputs_for_treatment_prediction():
-    age = st.number_input("Age", min_value=0, max_value=120, step=1)
+if page == "Treatment Seeking Employees":
+    st.header("Treatment Prediction")
+    st.subheader('Predicting whether a employee is likely to seek mental health treatment')
+    st.caption("Model Used : RandomForestClassifier")
+    
     gender = st.selectbox("Gender", ['Male', 'Female', 'Other'])
     self_employed = st.selectbox('Are you self-employed?', ['Unknown', 'Yes', 'No'])
     family_history = st.selectbox("Do you have a family history of mental illness?", ['Yes', 'No'])
-    work_interfere = st.selectbox(
-        'If you have a mental health condition, do you feel that it interferes with your work?',
-        ['Often', 'Rarely', 'Never', 'Sometimes', 'Unknown']
-    )
+    treatment = st.selectbox('Have you sought treatment for a mental health condition?', ['Yes', 'No'])
+    work_interfere = st.selectbox('If you have a mental health condition, do you feel that it interferes with your work?',
+                                  ['Often', 'Rarely', 'Never', 'Sometimes', 'Unknown'])
     remote_work = st.selectbox('Do you work remotely (outside of an office) at least 50% of the time?', ['Yes', 'No'])
     benefits = st.selectbox('Does your employer provide mental health benefits?', ["Don't know", 'Yes', 'No'])
     care_options = st.selectbox('Do you know the options for mental health care your employer provides?',
@@ -93,100 +102,72 @@ def inputs_for_treatment_prediction():
                                              ['No', 'Maybe', 'Yes'])
     coworkers = st.selectbox('Would you discuss a mental health issue with your coworkers?',
                              ['Some of them', 'No', 'Yes'])
-    mental_health_interview = st.selectbox('Would you bring up a mental health issue in an interview?', ['No', 'Yes'])
+    mental_health_interview = st.selectbox('Would you bring up a mental health issue in an interview?',
+                                           [ 'No', 'Yes'])
     supervisor = st.selectbox('Would you discuss a mental health issue with your supervisor(s)?',
                               ['No', 'Maybe', 'Yes'])
+    
+   # Feature order must match training
+    input_df = pd.DataFrame([{
+    'Gender': gender,
+    'self_employed': self_employed,
+    'family_history': family_history,
+    'treatment': treatment,
+    'work_interfere': work_interfere,
+    'remote_work': remote_work,
+    'benefits': benefits,
+    'care_options': care_options,
+    'wellness_program': wellness_program,
+    'seek_help': seek_help,
+    'leave': leave,
+    'mental_health_consequence': mental_health_consequence,
+    'coworkers': coworkers,
+    'mental_health_interview': mental_health_interview,
+    'supervisor': supervisor
+    }])
 
-    return pd.DataFrame({
-        'Age': [age],
-        'Gender': [gender],
-        'self_employed': [self_employed],
-        'family_history': [family_history],
-        'work_interfere': [work_interfere],
-        'remote_work': [remote_work],
-        'benefits': [benefits],
-        'care_options': [care_options],
-        'wellness_program': [wellness_program],
-        'seek_help': [seek_help],
-        'leave': [leave],
-        'mental_health_consequence': [mental_health_consequence],
-        'coworkers': [coworkers],
-        'mental_health_interview': [mental_health_interview],
-        'supervisor': [supervisor]
-    })
+    
+    if st.button('Predict'):
+        clf = joblib.load('Streamlit/clf_model.pkl')
+        predicted_treatment = clf.predict(input_df)
+        if predicted_treatment == 1 :
+            st.write('Yes')
+        else :
+            st.write("No")
 
-# ------------------------
-# About Section
-# ------------------------
-if section == "About":
-    st.title("Mental Health Prediction & Clustering App")
-    st.write("""
-    This app demonstrates:
-    - **Classification**: Predicting whether a person will seek mental health treatment.
-    - **Regression**: Predicting the person's age based on survey responses.
-    - **Unsupervised Clustering**: Grouping individuals into clusters based on similarities.
-    """)
 
-# ------------------------
-# Age Prediction Section
-# ------------------------
-elif section == "Age Prediction":
-    st.title("Age Prediction")
-    input_df = inputs_for_age_prediction()
-    if st.button("Predict Age"):
-        prediction = age_model.predict(input_df)
-        st.success(f"Predicted Age: {prediction:.1f} years")
-
-# ------------------------
-# Treatment Prediction Section
-# ------------------------
-elif section == "Treatment Prediction":
-    st.title("Treatment Prediction")
-    input_df = inputs_for_treatment_prediction()
-    if st.button("Predict Treatment"):
-        prediction = treatment_model.predict(input_df)
-        st.success(f"Treatment Prediction: {'Yes' if prediction == 1 else 'No'}")
-
-# ------------------------
-# Clustering Report Section
-# ------------------------
-elif section == "Clustering Report":
-    st.title("Clustering Analysis")
-    st.image("Images/cluster_plot.png", caption="Cluster Visualization", use_column_width=True)
-    st.write('''
-   
- **Cluster 0: "Minimal Mental Health Awareness"**
-- **Characteristics**: 
-  - Employees in this cluster often work in large companies (e.g., `no_employees = 1001`).
-  - They frequently respond with "Don't know" or "No" to questions about mental health benefits, wellness programs, and seeking help.
-  - Low engagement with mental health resources and support systems.
-  - Less likely to have sought treatment or discussed mental health issues openly.
-- **Rationale**: This group shows limited awareness or engagement with mental health support, possibly due to workplace culture or lack of resources.
-
----
-
- **Cluster 1: "Moderate Engagement with Mental Health Support"**
-- **Characteristics**: 
-  - Mixed responses to mental health benefits and wellness programs (some "Yes," some "Don't know").
-  - Moderate levels of seeking help or discussing mental health with coworkers/supervisors.
-  - Somewhat aware of mental health resources but not fully utilizing them.
-- **Rationale**: These employees are somewhat engaged with mental health support but may lack consistent access or confidence in workplace resources.
-
----
-
- **Cluster 2: "Proactive Mental Health Advocates"**
-- **Characteristics**: 
-  - Higher likelihood of responding "Yes" to mental health benefits, wellness programs, and seeking help.
-  - More open about discussing mental health with coworkers/supervisors.
-  - Often work in tech companies or smaller organizations where mental health support is more accessible.
-  - More likely to have sought treatment or taken leave for mental health reasons.
-- **Rationale**: This group actively engages with mental health resources and advocates for support in the workplace.
-
-| Cluster | Name                              | Key Traits                                                                 |
-|---------|-----------------------------------|---------------------------------------------------------------------------|
-| 0       | Minimal Mental Health Awareness   | Low engagement, large companies, "Don't know" responses.                  |
-| 1       | Moderate Engagement with Support  | Mixed responses, some awareness but inconsistent utilization.             |
-| 2       | Proactive Mental Health Advocates | High engagement, open discussions, likely to seek treatment.              |
-
+if page == 'Clustering Report':
+    st.header("Clustering employees")
+    st.subheader("Clustering employees based on their nature towards seeking mental health.")
+    st.write('I have used an k means algorithm with dimensionality reduction to make these clusters. ')
+    st.image(r'Images/Clusters.png')
+    st.header('Cluster Interpretation')
+    st.subheader('Cluster 0: Supervisor-Reliant Onsite Workers')
+    st.markdown('''
+- Family history: Very low (2%)  
+- Treatment: High (90%)  
+- Work interference: Moderate (47%)  
+- Remote work: None  
+- Communication: Open to supervisors (58%), moderate to coworkers/employers  
 ''')
-    st.image("Images/cluster_report.png",  use_column_width=True)
+
+    st.subheader('Cluster 1: Treated but Employer-Wary')
+    st.markdown('''
+- Family history: Very low (2%)  
+- Treatment: Very high (93%)  
+- Work interference: High (60%)  
+- Remote work: None  
+- Communication: Moderate with coworkers and supervisors, low with employers  
+''')
+
+    st.subheader('Cluster 2: Remote High-Risk Communicators')
+    st.markdown('''
+- Family history: Very low (1%)  
+- Treatment: Moderate (74%)  
+- Work interference: Moderate-High (52%)  
+- Remote work: Fully remote  
+- Communication: Open across all levels  
+''')
+
+
+
