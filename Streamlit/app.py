@@ -9,7 +9,7 @@ import pickle
 def load_models():
     with open("reg_model.pkl", "rb") as f:
         age_model = pickle.load(f)
-    with open("treatment_classifier.pkl", "rb") as f:
+    with open("clf_model.pkl", "rb") as f:
         treatment_model = pickle.load(f)
     return age_model, treatment_model
 
