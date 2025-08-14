@@ -7,7 +7,7 @@ import pickle
 # ------------------------
 @st.cache_resource
 def load_models():
-    with open("age_regressor.pkl", "rb") as f:
+    with open("reg_model.pkl", "rb") as f:
         age_model = pickle.load(f)
     with open("treatment_classifier.pkl", "rb") as f:
         treatment_model = pickle.load(f)
