@@ -73,7 +73,7 @@ elif page == 'Predict Age':
     
 # This will work with the pipeline
     if st.button('Predict'):
-        model = joblib.load('Streamlit/reg_model.pkl')
+        model = joblib.load(r'Streamlit/reg_model.pkl')
         predicted_age = model.predict(input_df)
         st.write(f"Predicted Age: {np.expm1(predicted_age)} years")
 
@@ -128,7 +128,7 @@ if page == "Treatment Seeking Employees":
 
     
     if st.button('Predict'):
-        clf = joblib.load('Streamlit/clf_model.pkl')
+        clf = joblib.load(r'Streamlit/clf_model.pkl')
         predicted_treatment = clf.predict(input_df)
         if predicted_treatment == 1 :
             st.write('Yes')
