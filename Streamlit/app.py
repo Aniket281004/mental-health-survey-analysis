@@ -7,9 +7,9 @@ import pickle
 # ------------------------
 @st.cache_resource
 def load_models():
-    with open("reg_model.pkl", "rb") as f:
+    with open(r"Streamlit/reg_model.pkl", "rb") as f:
         age_model = pickle.load(f)
-    with open("clf_model.pkl", "rb") as f:
+    with open(r"Streamlit/clf_model.pkl", "rb") as f:
         treatment_model = pickle.load(f)
     return age_model, treatment_model
 
