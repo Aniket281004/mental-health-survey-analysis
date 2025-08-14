@@ -157,7 +157,7 @@ elif section == "Treatment Prediction":
 # ------------------------
 elif section == "Clustering Report":
     st.title("Clustering Analysis")
-    st.image("cluster_plot.png", caption="Cluster Visualization", use_column_width=True)
+    st.image("Images/cluster_plot.png", caption="Cluster Visualization", use_column_width=True)
     st.write('''
    
  **Cluster 0: "Minimal Mental Health Awareness"**
@@ -194,4 +194,4 @@ elif section == "Clustering Report":
 | 2       | Proactive Mental Health Advocates | High engagement, open discussions, likely to seek treatment.              |
 
 ''')
-    st.image("cluster_report.png",  use_column_width=True)
+    st.image("Images/cluster_report.png",  use_column_width=True)
