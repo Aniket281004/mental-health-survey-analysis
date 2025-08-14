@@ -18,6 +18,7 @@ from sklearn.model_selection import GridSearchCV
 from xgboost import XGBRegressor
 import matplotlib.pyplot as plt
 import seaborn as sns
+df=pd.read_csv("clean._data.csv")
 features = ['Age','Gender', 'self_employed', 'family_history', 'work_interfere', 'remote_work', 'benefits', 'care_options', 'wellness_program', 'seek_help', 'leave', 'mental_health_consequence', 'coworkers', 'supervisor', 'mental_health_interview' ]
 X=df[features]
 y=df['treatment']
