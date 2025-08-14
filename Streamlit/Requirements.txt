@@ -1,7 +1,8 @@
+joblib
 pandas
 numpy
 matplotlib
 seaborn
 joblib
 scikit-learn
-pickle
+
