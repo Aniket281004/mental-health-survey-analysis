@@ -8,6 +8,7 @@ import seaborn as sns
 # Set page config
 st.set_page_config(page_title="Mental Health Analysis", layout="wide")
 age_labels = ['<18', '18-24', '25-34', '35-44', '45-54', '55-64', '65+']
+age_bins = [0, 18, 25, 35, 45, 55, 65, 100]
 # Load data
 @st.cache_data
 def load_data():
