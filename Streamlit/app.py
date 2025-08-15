@@ -34,7 +34,7 @@ if page == 'About':
     # Creates 2 equal-width columns
 
     
-    st.image("Images/treatment_workinterfere.png", width=600)  # Control width as needed
+    st.image("Images/treatment_workinterfere.png", width=800)  # Control width as needed
     st.subheader('Dataset Preview')
     st.dataframe(df.head())
     
