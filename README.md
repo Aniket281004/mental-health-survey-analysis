@@ -31,7 +31,7 @@ build data-driven solutions for:
 - **Regression Notebook:** [https://github.com/Aniket281004/mental-health-survey-analysis/blob/main/Model/RandomForestRegressor.py]
 - **Clustering Notebook:** [https://github.com/Aniket281004/mental-health-survey-analysis/blob/main/Model/Kmeans.py]
 - **Streamlit App:** [https://fg8w4tg3zfrrvcbvzkyamn.streamlit.app/]
-- **Technical Report:** [https://medium.com/@tanmay2k5/mental-health-analysis-of-tech-company-employees-1485c900cf81]
+- **Technical Report:** [https://medium.com/@aniketsharma281004/technical-report-predictive-modeling-of-mental-health-in-tech-employees-89f303631120]
 
 
 
