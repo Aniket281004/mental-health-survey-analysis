@@ -261,7 +261,7 @@ elif page == 'Clustering':
          - Treatment: Moderate (74%)  
         - Work interference: Moderate-High (52%)  
         """)
-    st.image(r'Images/clusters012.png',width=1200)
+    st.image(r'Images/clusters012.png',width=1050)
         
 # Add cluster visualizations
     st.subheader("Cluster Characteristics")
