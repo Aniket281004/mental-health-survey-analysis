@@ -30,7 +30,7 @@ if page == 'About':
     
     st.subheader('Key Insights')
     st.write("- About 50% of respondents have sought treatment for mental health")
-    st.write("- 35% report mental health sometimes interferes with work")
+    st.write("- 77% report mental health sometimes interferes with work")
     # Creates 2 equal-width columns
 
     
