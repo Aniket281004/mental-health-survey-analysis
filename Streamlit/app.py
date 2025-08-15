@@ -11,7 +11,7 @@ st.set_page_config(page_title="Mental Health Analysis", layout="wide")
 # Load data
 @st.cache_data
 def load_data():
-    return pd.read_csv('clean_data.csv')
+    return pd.read_csv('Streamlit/clean_data.csv')
 
 df = load_data()
 
