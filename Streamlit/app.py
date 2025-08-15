@@ -53,7 +53,7 @@ elif page == 'Predict Age':
     
     if st.button('Predict Age'):
         try:
-            model = joblib.load('reg_model.pkl')
+            model = joblib.load('Streamlit/reg_model.pkl')
             input_df = pd.DataFrame([{
                 'Gender': gender,
                 'family_history': family_history,
@@ -96,7 +96,7 @@ elif page == "Treatment Seeking":
     
     if st.button('Predict Treatment Seeking'):
         try:
-            clf = joblib.load('clf_model.pkl')
+            clf = joblib.load('Streamlit/clf_model.pkl')
             input_df = pd.DataFrame([{
                 'Gender': gender,
                 'family_history': family_history,
