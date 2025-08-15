@@ -224,9 +224,9 @@ elif page == "Treatment Prediction":
 # Clustering page
 elif page == 'Clustering':
     st.header("Employee Clustering Analysis")
-    
+    st.image(r'Images/clusters_plot.png')
     st.subheader("Cluster Characteristics")
-    
+    st.image(r'Images/clusters012.png')
     st.write("""
     **Cluster 0: Supervisor-Reliant Onsite Workers**
     - Family history: Very low (2%)
@@ -247,3 +247,4 @@ elif page == 'Clustering':
     - Treatment: Moderate (74%)
     - Work interference: Moderate-High (52%)
     """)
+    st.image(r'Images/clusters_report.png')
