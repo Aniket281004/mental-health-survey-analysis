@@ -7,7 +7,7 @@ import seaborn as sns
 
 # Set page config
 st.set_page_config(page_title="Mental Health Analysis", layout="wide")
-
+age_labels = ['<18', '18-24', '25-34', '35-44', '45-54', '55-64', '65+']
 # Load data
 @st.cache_data
 def load_data():
@@ -92,7 +92,21 @@ elif page == 'Predict Age':
             predicted_age = model.predict(input_df)
             predicted_age = np.expm1(predicted_age)[0]
             
-            st.subheader(f"Predicted Age: {predicted_age:.1f} years")
+         
+    
+    # Round and clip to valid age group index
+            pred_rounded = int(np.round(predicted_age))
+            pred_rounded = np.clip(pred_rounded, 0, len(age_labels)-1)
+    
+    # Map to label
+            predicted_age = age_labels[pred_rounded]
+    
+    # Display
+            st.subheader("Result")
+            st.write(f"Predicted Age Group: **{predicted_age}**")
+    
+    # Debug info (optional)
+            st.caption(f"Raw regression output: {pred_encoded:.2f} → Rounded to index: {pred_rounded}")
             
             fig, ax = plt.subplots()
             sns.histplot(df['Age'].dropna(), bins=20, kde=True, ax=ax)
