@@ -290,9 +290,9 @@ elif page == 'Clustering':
 
 # Assuming you have these PNG files in your directory
     cluster_images = {
-        "Feature Correlations": "cluster_correlations.png",
-        "Demographic Breakdown": "cluster_demographics.png",
-        "Treatment Patterns": "cluster_treatment.png"
+        "Feature Correlations": "Images/famhisvsclusters.png",
+        "Demographic Breakdown": "Images/gendervsclusters.png",
+        "Treatment Patterns": "Images/treatmentvsclusters.png"
     }
 
 # Display images with captions
