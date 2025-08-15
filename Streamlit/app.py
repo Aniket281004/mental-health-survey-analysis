@@ -31,11 +31,12 @@ if page == 'About':
     st.subheader('Key Insights')
     st.write("- About 50% of respondents have sought treatment for mental health")
     st.write("- 35% report mental health sometimes interferes with work")
-    col1, col2 = st.columns(2)  # Creates 2 equal-width columns
+    # Creates 2 equal-width columns
 
     
-    st.image("Images/treatment_workinterfere.png", width=1200)  # Control width as needed
-
+    st.image("Images/treatment_workinterfere.png", width=600)  # Control width as needed
+    st.subheader('Dataset Preview')
+    st.dataframe(df.head())
     
 
 # Predict Age page
