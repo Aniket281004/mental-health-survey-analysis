@@ -52,7 +52,7 @@ page = st.sidebar.selectbox("Go to", ["About", "Predict Age", "Treatment Seeking
 # Load data (cached)
 @st.cache_data
 def load_data():
-    return pd.read_csv('survey.csv')
+    return pd.read_csv('clean_data.csv')
 
 df = load_data()
 
