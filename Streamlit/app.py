@@ -4,6 +4,8 @@ import joblib
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import streamlit as st
+from PIL import Image 
 
 # Set page config
 st.set_page_config(page_title="Mental Health Analysis", layout="wide")
@@ -248,3 +250,72 @@ elif page == 'Clustering':
     - Work interference: Moderate-High (52%)
     """)
     st.image(r'Images/clusters_report.png')
+     # For loading PNG files
+
+# Add clustering report section
+    st.header("Employee Mental Health Clusters Analysis")
+
+# Create columns for cluster summaries
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.subheader("Cluster 0")
+        st.markdown("""
+        **Supervisor-Reliant Onsite Workers**  
+        - Family history: Very low (2%)  
+        - Treatment: High (90%)  
+        - Work interference: Moderate (47%)  
+        """)
+
+    with col2:
+        st.subheader("Cluster 1")
+        st.markdown("""
+        **Treated but Employer-Wary**  
+        - Family history: Very low (2%)  
+        - Treatment: Very high (93%)  
+        - Work interference: High (60%)  
+        """)
+
+    with col3:
+        st.subheader("Cluster 2")
+        st.markdown("""
+        **Remote High-Risk Communicators**  
+        - Family history: Very low (1%)  
+         - Treatment: Moderate (74%)  
+        - Work interference: Moderate-High (52%)  
+        """)
+
+# Add cluster visualizations
+    st.subheader("Cluster Characteristics")
+
+# Assuming you have these PNG files in your directory
+    cluster_images = {
+        "Feature Correlations": "cluster_correlations.png",
+        "Demographic Breakdown": "cluster_demographics.png",
+        "Treatment Patterns": "cluster_treatment.png"
+    }
+
+# Display images with captions
+    for description, img_path in cluster_images.items():
+        try:
+            image = Image.open(img_path)
+            st.image(image, caption=description, use_column_width=True)
+        except FileNotFoundError:
+            st.warning(f"Image not found: {img_path}")
+
+# Add interpretation section
+    st.subheader("Key Insights")
+    st.markdown("""
+    1. **Cluster 0** shows high treatment rates despite low family history, suggesting workplace factors dominate  
+    2. **Cluster 1** has the highest work interference, indicating severe productivity impacts  
+    3. **Cluster 2** represents remote workers needing communication-focused interventions  
+    """)
+
+# Optional: Add expandable technical details
+    with st.expander("Methodology Details"):
+        st.markdown("""
+        - Clustering performed using K-Means (k=3)  
+        - Features scaled using StandardScaler  
+        - Optimal k determined via elbow method  
+        - Silhouette score: 0.39  
+        """)
