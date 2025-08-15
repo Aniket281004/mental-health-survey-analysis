@@ -89,30 +89,68 @@ elif page == 'Predict Age':
                 'supervisor': supervisor
             }])
             
-            predicted_age = model.predict(input_df)
-            predicted_age = np.expm1(predicted_age)[0]
-            
-         
-    
-    # Round and clip to valid age group index
-            pred_rounded = int(np.round(predicted_age))
-            pred_rounded = np.clip(pred_rounded, 0, len(age_labels)-1)
-    
-    # Map to label
-            predicted_age = age_labels[pred_rounded]
-    
-    # Display
-            st.subheader("Result")
-            st.write(f"Predicted Age Group: **{predicted_age}**")
-    
-    # Debug info (optional)
-            st.caption(f"Raw regression output: {pred_encoded:.2f} → Rounded to index: {pred_rounded}")
-            
-            fig, ax = plt.subplots()
-            sns.histplot(df['Age'].dropna(), bins=20, kde=True, ax=ax)
-            ax.axvline(predicted_age, color='red', linestyle='--', label='Predicted Age')
-            st.pyplot(fig)
-            
+          # Get model prediction and transform if needed
+        raw_prediction = model.predict(input_df)[0]
+        predicted_value = np.expm1(raw_prediction)  # Only use if you did log1p transformation during training
+
+# Convert to age group
+        age_group_index = int(np.round(predicted_value))
+        age_group_index = np.clip(age_group_index, 0, len(age_labels)-1)  # Ensure valid index
+        predicted_age_group = age_labels[age_group_index]
+
+# Get age range for visualization
+        age_range_start = age_bins[age_group_index]
+        age_range_end = age_bins[age_group_index+1]
+        age_midpoint = (age_range_start + age_range_end) / 2
+
+# Create visualization
+        st.subheader("Age Distribution Analysis")
+
+        fig, ax = plt.subplots(figsize=(10, 6))
+
+# Plot age distribution
+        sns.histplot(
+    df['Age'].dropna(), 
+    bins=age_bins, 
+    kde=False, 
+    ax=ax, 
+    color='skyblue',
+    alpha=0.7
+        )
+
+# Add prediction indicator
+        ax.axvline(
+    age_midpoint, 
+    color='red', 
+    linestyle='--', 
+    linewidth=2, 
+    label=f'Predicted: {predicted_age_group}'
+        )
+
+# Add reference lines for age group boundaries
+        ax.axvline(age_range_start, color='gray', linestyle=':', alpha=0.5)
+        ax.axvline(age_range_end, color='gray', linestyle=':', alpha=0.5)
+
+# Format plot
+        ax.set_title('Age Distribution with Prediction', pad=20)
+        ax.set_xlabel('Age (years)')
+        ax.set_ylabel('Number of People')
+        ax.legend()
+
+# Display plot
+        st.pyplot(fig)
+
+# Add explanatory text
+        st.markdown(f"""
+### Prediction Details
+- **Predicted Age Group**: {predicted_age_group} (ages {age_range_start}-{age_range_end})
+- **Midpoint Age**: {age_midpoint:.1f} years
+- **Raw Model Output**: {raw_prediction:.2f}  
+          {'(Exponentiated: ' + str(round(predicted_value, 2)) if 'predicted_value' in locals() else ''}
+
+The histogram shows the age distribution in our dataset, with the red dashed line indicating 
+the midpoint of your predicted age group. Gray dotted lines show the boundaries of this age group.
+""")
         except Exception as e:
             st.error(f"Error: {str(e)}")
 
