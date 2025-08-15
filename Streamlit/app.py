@@ -16,7 +16,7 @@ def load_data():
 df = load_data()
 
 # Sidebar navigation
-page = st.sidebar.selectbox("Go to", ["About", "Predict Age", "Treatment Seeking", "Clustering"])
+page = st.sidebar.selectbox("Go to", ["About", "Predict Age", "Treatment Prediction", "Clustering"])
 
 # About page
 if page == 'About':
