@@ -38,10 +38,10 @@ elif page == 'Predict Age':
     
     # Input features
     st.subheader("Personal Information")
-    age = st.number_input("Age", min_value=18, max_value=100, value=30)
     gender = st.selectbox("Gender", ['Male', 'Female', 'Other'])
     self_employed = st.selectbox('Are you self-employed?', ['Unknown', 'Yes', 'No'])
     family_history = st.selectbox("Do you have a family history of mental illness?", ['Yes', 'No'])
+    treatment = st.selectbox('Have you sought treatment for a mental health condition?', ['Yes', 'No'])
     work_interfere = st.selectbox('If you have a mental health condition, do you feel that it interferes with your work?',
                                 ['Often', 'Rarely', 'Never', 'Sometimes', 'Unknown'])
     
@@ -71,10 +71,11 @@ elif page == 'Predict Age':
         try:
             model = joblib.load('Streamlit/reg_model.pkl')
             input_df = pd.DataFrame([{
-                'Age': age,
+               
                 'Gender': gender,
                 'self_employed': self_employed,
                 'family_history': family_history,
+                'treatment': treatment,
                 'work_interfere': work_interfere,
                 'remote_work': remote_work,
                 'benefits': benefits,
