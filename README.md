@@ -26,11 +26,11 @@ build data-driven solutions for:
 ---
 
 ## 🔗 Important Links  
-- **EDA Notebook:** [https://github.com/Tanmay-1k/OL-25-LP-097/blob/main/Models/00_EDA.py]
-- **Classification Notebook:** [https://github.com/Tanmay-1k/OL-25-LP-097/blob/main/Models/04_RandomForest_CLF.py]
-- **Regression Notebook:** [https://github.com/Tanmay-1k/OL-25-LP-097/blob/main/Models/03_Linear_REG.py]
-- **Clustering Notebook:** [https://github.com/Tanmay-1k/OL-25-LP-097/blob/main/Models/06_KMeans_CLS.py]
-- **Streamlit App:** [https://azn5dnrjxfpjd92mro3gxj.streamlit.app]
+- **EDA Notebook:** [(https://github.com/Aniket281004/mental-health-survey-analysis/blob/main/Model/EDA.py)]
+- **Classification Notebook:** [https://github.com/Aniket281004/mental-health-survey-analysis/blob/main/Model/LogisticRegression.py]
+- **Regression Notebook:** [https://github.com/Aniket281004/mental-health-survey-analysis/blob/main/Model/RandomForestRegressor.py]
+- **Clustering Notebook:** [https://github.com/Aniket281004/mental-health-survey-analysis/blob/main/Model/Kmeans.py]
+- **Streamlit App:** [https://fg8w4tg3zfrrvcbvzkyamn.streamlit.app/]
 - **Technical Report:** [https://medium.com/@tanmay2k5/mental-health-analysis-of-tech-company-employees-1485c900cf81]
 
 
