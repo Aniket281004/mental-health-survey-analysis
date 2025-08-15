@@ -27,7 +27,7 @@ build data-driven solutions for:
 
 ## 🔗 Important Links  
 - **EDA Notebook:** [(https://github.com/Aniket281004/mental-health-survey-analysis/blob/main/Model/EDA.py)]
-- **Classification Notebook:** [https://github.com/Aniket281004/mental-health-survey-analysis/blob/main/Model/LogisticRegression.py]
+- **Classification Notebook:** [https://github.com/Aniket281004/mental-health-survey-analysis/blob/main/Model/LogisticRegression_clf.py]
 - **Regression Notebook:** [https://github.com/Aniket281004/mental-health-survey-analysis/blob/main/Model/RandomForestRegressor.py]
 - **Clustering Notebook:** [https://github.com/Aniket281004/mental-health-survey-analysis/blob/main/Model/Kmeans.py]
 - **Streamlit App:** [https://fg8w4tg3zfrrvcbvzkyamn.streamlit.app/]
