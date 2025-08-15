@@ -225,36 +225,13 @@ elif page == "Treatment Prediction":
             st.error(f"Error: {str(e)}")
 # Clustering page
 elif page == 'Clustering':
-    st.header("Employee Clustering Analysis")
+    
     st.image(r'Images/clusters_plot.png')
-    st.subheader("Cluster Characteristics")
-    st.image(r'Images/clusters012.png')
-    st.write("""
-    **Cluster 0: Supervisor-Reliant Onsite Workers**
-    - Family history: Very low (2%)
-    - Treatment: High (90%)
-    - Work interference: Moderate (47%)
-    """)
-    
-    st.write("""
-    **Cluster 1: Treated but Employer-Wary**
-    - Family history: Very low (2%)
-    - Treatment: Very high (93%)
-    - Work interference: High (60%)
-    """)
-    
-    st.write("""
-    **Cluster 2: Remote High-Risk Communicators**
-    - Family history: Very low (1%)
-    - Treatment: Moderate (74%)
-    - Work interference: Moderate-High (52%)
-    """)
-    st.image(r'Images/clusters_report.png')
      # For loading PNG files
 
 # Add clustering report section
     st.header("Employee Mental Health Clusters Analysis")
-
+    
 # Create columns for cluster summaries
     col1, col2, col3 = st.columns(3)
 
@@ -284,7 +261,8 @@ elif page == 'Clustering':
          - Treatment: Moderate (74%)  
         - Work interference: Moderate-High (52%)  
         """)
-
+    st.image(r'Images/clusters012.png',width=400)
+        
 # Add cluster visualizations
     st.subheader("Cluster Characteristics")
 
@@ -292,7 +270,8 @@ elif page == 'Clustering':
     cluster_images = {
         "Feature Correlations": "Images/famhisvsclusters.png",
         "Demographic Breakdown": "Images/gendervsclusters.png",
-        "Treatment Patterns": "Images/treatmentvsclusters.png"
+        "Treatment Patterns": "Images/treatmentvsclusters.png",
+        "Clustering with Age":"Images/agevsclusters.png"
     }
 
 # Display images with captions
