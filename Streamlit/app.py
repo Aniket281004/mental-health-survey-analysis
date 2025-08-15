@@ -299,7 +299,7 @@ elif page == 'Clustering':
     for description, img_path in cluster_images.items():
         try:
             image = Image.open(img_path)
-            st.image(image, caption=description,use_column_width=True, width=200)
+            st.image(image, caption=description, width=200)
         except FileNotFoundError:
             st.warning(f"Image not found: {img_path}")
 
