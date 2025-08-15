@@ -261,7 +261,7 @@ elif page == 'Clustering':
          - Treatment: Moderate (74%)  
         - Work interference: Moderate-High (52%)  
         """)
-    st.image(r'Images/clusters012.png',width=800)
+    st.image(r'Images/clusters012.png',width=1200)
         
 # Add cluster visualizations
     st.subheader("Cluster Characteristics")
@@ -280,7 +280,7 @@ elif page == 'Clustering':
             st.image(image, caption=description, width=400)
         except FileNotFoundError:
             st.warning(f"Image not found: {img_path}")
-    st.image(r'Images/agevsclusters.png',width=800)
+    st.image(r'Images/agevsclusters.png',width=1200)
 
 # Add interpretation section
     st.subheader("Key Insights")
